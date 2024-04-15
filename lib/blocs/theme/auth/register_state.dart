@@ -1,3 +1,4 @@
+import 'package:basic_english/models/user_model.dart';
 import 'package:equatable/equatable.dart';
 
 class RegisterState extends Equatable {
@@ -16,9 +17,62 @@ class RegisterState extends Equatable {
 }
 
 class RegisterSuccess extends RegisterState {
-  final bool data;
+  final UserModel user;
+  const RegisterSuccess({required this.user, super.message, super.isLoading});
 
-  const RegisterSuccess({
-    required this.data,
-  }) : super(data: data);
+  @override
+  List<Object?> get props => [user, message, isLoading];
+}
+
+class RegisterFailed extends RegisterState {
+  const RegisterFailed({super.message, super.isLoading});
+
+  @override
+  List<Object?> get props => [message, isLoading];
+}
+
+class CheckSuccess extends RegisterState {
+  final String email;
+  final String password;
+  final int? verificationCode;
+  const CheckSuccess({
+    required this.email,
+    required this.password,
+    this.verificationCode,
+    super.message,
+    super.isLoading,
+    super.data,
+  });
+
+  @override
+  List<Object?> get props => [message, isLoading, data];
+}
+
+class CheckFailed extends RegisterState {
+  const CheckFailed({super.message, super.isLoading, super.data});
+
+  @override
+  List<Object?> get props => [message, isLoading, data];
+}
+
+class ForgotPasswordCheckSuccess extends RegisterState {
+  final String email;
+  final int? verificationCode;
+  const ForgotPasswordCheckSuccess({
+    required this.email,
+    this.verificationCode,
+    super.message,
+    super.isLoading,
+    super.data,
+  });
+
+  @override
+  List<Object?> get props => [message, isLoading, data];
+}
+
+class ForgotPasswordCheckFailed extends RegisterState {
+  const ForgotPasswordCheckFailed({super.message, super.isLoading, super.data});
+
+  @override
+  List<Object?> get props => [message, isLoading, data];
 }
