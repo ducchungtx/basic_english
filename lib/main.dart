@@ -1,3 +1,12 @@
+import 'package:basic_english/blocs/theme/auth/login/login_bloc.dart';
+import 'package:basic_english/blocs/theme/auth/register/register_bloc.dart';
+import 'package:basic_english/services/user_service.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:basic_english/blocs/theme/theme_bloc.dart';
 import 'package:basic_english/blocs/theme/theme_event.dart';
 import 'package:basic_english/blocs/theme/theme_state.dart';
@@ -6,12 +15,6 @@ import 'package:basic_english/generated/codegen_loader.g.dart';
 import 'package:basic_english/helpers/ui_helper.dart';
 import 'package:basic_english/services/theme_service.dart';
 import 'package:basic_english/views/splash/splash_view.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   await dotenv.load();
@@ -20,7 +23,13 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   runApp(
     MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => ThemeBloc())],
+      providers: [
+        BlocProvider(
+            create: (context) => LoginBloc(userService: UserService())),
+        BlocProvider(
+            create: (context) => RegisterBloc(userService: UserService())),
+        BlocProvider(create: (context) => ThemeBloc()),
+      ],
       child: EasyLocalization(
         supportedLocales: SuppertedLocales.supportedLocales,
         path: 'assets/translations',
