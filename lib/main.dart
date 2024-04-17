@@ -1,15 +1,16 @@
-import 'package:basic_english/blocs/theme/auth/login/login_bloc.dart';
-import 'package:basic_english/blocs/theme/auth/register/register_bloc.dart';
-import 'package:basic_english/services/user_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import 'package:basic_english/blocs/auth/login/login_bloc.dart';
+import 'package:basic_english/blocs/auth/register/register_bloc.dart';
+import 'package:basic_english/blocs/profile/profile_bloc.dart';
 import 'package:basic_english/blocs/theme/theme_bloc.dart';
 import 'package:basic_english/blocs/theme/theme_event.dart';
 import 'package:basic_english/blocs/theme/theme_state.dart';
+import 'package:basic_english/services/user_service.dart';
 import 'package:basic_english/constants/supported_locales.dart';
 import 'package:basic_english/generated/codegen_loader.g.dart';
 import 'package:basic_english/helpers/ui_helper.dart';
@@ -28,6 +29,8 @@ void main() async {
             create: (context) => LoginBloc(userService: UserService())),
         BlocProvider(
             create: (context) => RegisterBloc(userService: UserService())),
+        BlocProvider(
+            create: (context) => ProfileBloc(userService: UserService())),
         BlocProvider(create: (context) => ThemeBloc()),
       ],
       child: EasyLocalization(
