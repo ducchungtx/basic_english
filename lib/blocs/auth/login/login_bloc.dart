@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:basic_english/blocs/auth/login/login_event.dart';
-import 'package:basic_english/blocs/auth/login/login_state_.dart';
+import 'package:basic_english/blocs/auth/login/login_state.dart';
 import 'package:basic_english/generated/locale_keys.g.dart';
 import 'package:basic_english/models/http_response_model.dart';
 import 'package:basic_english/models/user_model.dart';
